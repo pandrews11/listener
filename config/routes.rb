@@ -2,7 +2,10 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :users
-  resources :stations
+  resources :rooms do
+    get 'next', on: :member
+    post 'set_station_id', on: :member
+  end
 
   root 'index#show'
 

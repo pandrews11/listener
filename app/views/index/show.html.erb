@@ -1,0 +1,19 @@
+<%= link_to 'New room', new_room_path %>
+
+<div class="panel panel-default">
+  <div class="panel-heading">Active rooms</div>
+
+  <table class="table table-striped">
+    <tr>
+      <th>Name</th>
+      <th>Owner</th>
+    </tr>
+
+    <% Room.all.each do |s| %>
+      <tr>
+        <td><%= link_to s.name, room_path(s) %></td>
+        <td><%= s.owner %>
+      </tr>
+    <% end %>
+  </table>
+</div>
