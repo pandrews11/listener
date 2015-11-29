@@ -17,7 +17,7 @@ class RoomsController < ApplicationController
   def set_station_id
     @room = Room.find(params[:id])
 
-    @room.station_id = params[:station_id]
+    @room.update_attributes({ :station_id => params[:station_id] })
 
     respond_to do |format|
       format.js

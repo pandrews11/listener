@@ -4,7 +4,7 @@ class CreateRooms < ActiveRecord::Migration
       t.text :name
       t.text :username
       t.text :password
-      t.integer :station_id
+      t.text :station_id
       t.belongs_to :user
       t.timestamps null: false
     end

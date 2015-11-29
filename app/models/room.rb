@@ -8,19 +8,27 @@ class Room < ActiveRecord::Base
     @box ||= Box::User.login username, password
   end
 
-  def station_id
-    @station_id ||= box.stations.first.station_id
-  end
-
-  def current_station
-    box.find_station station_id
+  def station
+    @station ||= box.find_station(station_id) || box.stations.first
   end
 
   def stations
     box.stations
   end
 
+  def album_name_list
+    station.playlist.map &:album_name
+  end
+
+  def song_name_list
+    station.playlist.map &:song_name
+  end
+
   def song_url_list
-    box.find_station(station_id).playlist.map &:high_quality_audio_url
+    station.playlist.map &:high_quality_audio_url
+  end
+
+  def info
+    station
   end
 end

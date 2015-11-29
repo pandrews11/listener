@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20151006032531) do
     t.text     "name"
     t.text     "username"
     t.text     "password"
-    t.integer  "station_id"
+    t.text     "station_id"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

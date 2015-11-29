@@ -1,13 +1,18 @@
 <div class="room-list">
   <ul>
     <% @room.stations.each do |s| %>
-      <%= button_to s.station_name, { action: 'set_station_id', station_id: s.station_id}, remote: true %>
+      <%= @room.decorate.play_station(s) %>
     <% end %>
   </ul>
 </div>
 
 <div id="audio-player">
-  <audio controls>
-    <source src=<%=@room.song_url_list.first%>>
+  <audio controls autoplay>
+    <source src=<%= @room.song_url_list.first %>>
   </audio>
+</div>
+
+<div id="song-info">
+  <span id="song-name"><%= @room.song_name_list.first %></span>:
+  <span id="song-album"><%= @room.album_name_list.first %></span>
 </div>
