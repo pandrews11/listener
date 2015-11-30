@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :users
   resources :rooms do
     get 'next', on: :member
+    get 'info', on: :member
     post 'set_station_id', on: :member
   end
 

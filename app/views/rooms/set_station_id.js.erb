@@ -2,8 +2,4 @@ $('form').removeClass('active');
 $('form input[data-station-id=<%= escape_javascript(@room.station_id) %>]')
   .parent().addClass('active');
 
-$('#song-name').text("<%= escape_javascript(@room.song_name_list.first) %>")
-$('#song-album').text("<%= escape_javascript(@room.album_name_list.first) %>")
-
-
-$('#audio-player').find('audio').data('player').setNextSong();
+$('#audio-player').find('audio').radio('stationChange');

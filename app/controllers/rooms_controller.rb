@@ -1,6 +1,8 @@
 class RoomsController < ApplicationController
   respond_to :html, :json
 
+  before_filter :find_room, :except => [:new, :create, :index]
+
   def new
     @room = Room.new
   end
@@ -11,7 +13,12 @@ class RoomsController < ApplicationController
   end
 
   def show
-    @room = Room.find(params[:id])
+  end
+
+  def info
+    respond_to do |format|
+      format.json { render json: { room: @room.info, status: 200 } }
+    end
   end
 
   def set_station_id
@@ -33,6 +40,10 @@ class RoomsController < ApplicationController
   end
 
   private
+
+  def find_room
+    @room ||= Room.find(params[:id])
+  end
 
   def room_params
     params.require(:room).permit(:username, :password, :name)

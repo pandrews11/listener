@@ -1,10 +1,16 @@
 require 'box'
+require 'base64'
 
 class Room < ActiveRecord::Base
 
   belongs_to :owner, :class_name => 'User'
 
   def box
+    marshal_box if read_attribute(:box).nil?
+    Marshal.load(Base64.decode64(read_attribute :box))
+  end
+
+  def box_api
     @box ||= Box::User.login username, password
   end
 
@@ -16,19 +22,27 @@ class Room < ActiveRecord::Base
     box.stations
   end
 
-  def album_name_list
-    station.playlist.map &:album_name
+  def playlist
+    station.playlist
   end
 
-  def song_name_list
-    station.playlist.map &:song_name
-  end
-
-  def song_url_list
-    station.playlist.map &:high_quality_audio_url
+  def song_map
+    playlist.map do |p|
+      {
+        :song => p.song_name,
+        :album => p.album_name,
+        :artist => p.artist_name,
+        :song_url => p.high_quality_audio_url
+      }
+    end
   end
 
   def info
-    station
+    { :station_id => station.station_id, :playlist => song_map }
+  end
+
+  def marshal_box
+    write_attribute :box, Base64.encode64(Marshal.dump(box_api))
+    save
   end
 end
