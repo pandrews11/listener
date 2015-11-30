@@ -15,6 +15,11 @@
 //= require jquery-ui
 //= require turbolinks
 //= require bootstrap-sprockets
+//= require websocket_rails/main
 //= require queue
 //= require rooms
+//= require tabs
 //= require_tree .
+
+
+

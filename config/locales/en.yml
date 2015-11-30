@@ -20,4 +20,8 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  index:
+    summary: >
+      Listener is a pandora client which allows users to listen to their radios
+      together at the same time. Simply join a friends radio to listen with them
+      or create your own.

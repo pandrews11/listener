@@ -13,6 +13,7 @@ class RoomsController < ApplicationController
   end
 
   def show
+    WebsocketRails["room-#{params[:id]}"].trigger(:join)
   end
 
   def info
@@ -22,20 +23,10 @@ class RoomsController < ApplicationController
   end
 
   def set_station_id
-    @room = Room.find(params[:id])
-
     @room.update_attributes({ :station_id => params[:station_id] })
 
     respond_to do |format|
       format.js
-    end
-  end
-
-  def next
-    url = Room.find(params[:id]).song_url_list.first
-
-    respond_to do |format|
-      format.json { render json: { url: url, status: 200 } }
     end
   end
 
@@ -46,6 +37,6 @@ class RoomsController < ApplicationController
   end
 
   def room_params
-    params.require(:room).permit(:username, :password, :name)
+    params.require(:room).permit(:username, :password, :name, :user_id)
   end
 end

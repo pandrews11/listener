@@ -25,5 +25,7 @@ module Listener
 
     # Autoload lib
     config.autoload_paths << Rails.root.join('lib')
+
+    config.web_console.whitelisted_ips = '192.168.0.0/16'
   end
 end

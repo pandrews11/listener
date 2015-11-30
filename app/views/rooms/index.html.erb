@@ -1,0 +1,27 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Rooms</h3>
+  </div>
+  <div class="panel-body">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Owner</th>
+          <th>Currently listening to</th>
+          <th>Listeners</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% Room.all.each do |r| %>
+          <tr>
+            <td><%= r.name %></td>
+            <td><%= r.user.username %></td>
+            <td></td>
+            <td></td>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+

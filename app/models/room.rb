@@ -3,7 +3,7 @@ require 'base64'
 
 class Room < ActiveRecord::Base
 
-  belongs_to :owner, :class_name => 'User'
+  belongs_to :user
 
   def box
     marshal_box if read_attribute(:box).nil?

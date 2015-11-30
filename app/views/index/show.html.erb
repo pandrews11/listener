@@ -1,19 +1,8 @@
-<%= link_to 'New room', new_room_path %>
-
-<div class="panel panel-default">
-  <div class="panel-heading">Active rooms</div>
-
-  <table class="table table-striped">
-    <tr>
-      <th>Name</th>
-      <th>Owner</th>
-    </tr>
-
-    <% Room.all.each do |s| %>
-      <tr>
-        <td><%= link_to s.name, room_path(s) %></td>
-        <td><%= s.owner %>
-      </tr>
-    <% end %>
-  </table>
+<div class="jumbotron">
+  <h2>Welcome to Listener!</h2>
+  <p><%= t('index.summary') %></p>
+  <p>
+    <%= link_to 'Create', new_room_path, :class => 'btn btn-success btn-lg' %>
+    <%= link_to 'Join', rooms_path, :class => 'btn btn-primary btn-lg' %>
+  <p>
 </div>

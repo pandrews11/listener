@@ -8,14 +8,14 @@
 
 <div id="audio-player">
   <audio controls autoplay>
-    <source src=<%= @room.playlist.first.high_quality_audio_url %>>
+    <source src=<%= @room.playlist.try(:first).try(:high_quality_audio_url) %>>
   </audio>
 </div>
 
 <div id="song-info">
-  <span id="song-name"><%= @room.playlist.first.song_name %></span>:
-  <span id="artist-name"><%= @room.playlist.first.artist_name %></span> --
-  <span id="song-album"><%= @room.playlist.first.album_name %></span>
+  <span id="song-name"><%= @room.playlist.try(:first).try(:song_name) %></span>:
+  <span id="artist-name"><%= @room.playlist.try(:first).try(:artist_name) %></span> --
+  <span id="song-album"><%= @room.playlist.try(:first).try(:album_name) %></span>
 </div>
 
 <span id="next">Next</span>
