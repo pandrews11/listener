@@ -15,10 +15,10 @@
       <tbody>
         <% Room.all.each do |r| %>
           <tr>
-            <td><%= r.name %></td>
+            <td><%= link_to r.name, room_path(r) %></td>
             <td><%= r.user.username %></td>
             <td></td>
-            <td></td>
+            <td><%= r.listeners %></td>
         <% end %>
       </tbody>
     </table>

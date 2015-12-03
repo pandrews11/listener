@@ -13,7 +13,13 @@ class RoomsController < ApplicationController
   end
 
   def show
-    WebsocketRails["room-#{params[:id]}"].trigger(:join)
+    @listener_status = get_listener_status
+  end
+
+  def song_complete
+    @room.complete_song
+    @room.save
+    render nothing: true
   end
 
   def info
@@ -38,5 +44,9 @@ class RoomsController < ApplicationController
 
   def room_params
     params.require(:room).permit(:username, :password, :name, :user_id)
+  end
+
+  def get_listener_status
+    current_user.owns?(@room) ? 'manager' : 'listener'
   end
 end

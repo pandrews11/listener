@@ -6,4 +6,8 @@ class User < ActiveRecord::Base
 
   has_one :room
 
+  def owns?(room)
+    self.room == room
+  end
+
 end

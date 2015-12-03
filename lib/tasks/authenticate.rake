@@ -1,0 +1,2 @@
+namespace :authenticate do
+end

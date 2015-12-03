@@ -13,11 +13,12 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
-//= require turbolinks
 //= require bootstrap-sprockets
 //= require websocket_rails/main
+//= require utils
 //= require queue
-//= require rooms
+//= require manager
+//= require listener
 //= require tabs
 //= require_tree .
 

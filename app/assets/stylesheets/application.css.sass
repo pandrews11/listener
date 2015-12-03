@@ -16,6 +16,7 @@
 
 @import "bootstrap-sprockets"
 @import "bootstrap"
+@import "font-awesome"
 
 .field
   margin-bottom: 10px
@@ -28,9 +29,45 @@
   margin: 0 auto
 
 .room-list
+  max-height: 350px
+  max-width: 285px
+  overflow-y: scroll
+  overflow-x: hidden
   float: left
+  border: 1px solid #eee
+  margin-right: 20px
+
+  input[type='submit']
+    width: 275px
+
+.audio-player-wrapper.well
+  display: inline-block
+
+  .player-with-data
+    display: inline-block
+
+  #audio-player
+    margin-bottom: 10px
+  p
+    margin-bottom: 0px
+    margin-left: 10px
+
+  #album-art
+    display: inline-block
+    margin-left: 20px
 
 form.active input[type='submit']
   background-color: green
+
+#next-wrapper
+  display: inline-block
+  vertical-align: super
+
+  &:hover
+    cursor: pointer
+    opacity: 0.75
+
+
+
 
 

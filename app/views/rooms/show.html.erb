@@ -1,21 +1,27 @@
-<div class="room-list">
-  <ul>
-    <% @room.stations.each do |s| %>
-      <%= @room.decorate.play_station(s) %>
-    <% end %>
-  </ul>
+<%= javascript_include_tag 'rooms' %>
+
+<div class="room-list list-group">
+  <% @room.stations.each do |s| %>
+    <%= @room.decorate.play_station(s) %>
+  <% end %>
 </div>
 
-<div id="audio-player">
-  <audio controls autoplay>
-    <source src=<%= @room.playlist.try(:first).try(:high_quality_audio_url) %>>
-  </audio>
-</div>
+<div class="well audio-player-wrapper col-md-8">
+  <div class="player-with-data">
+    <div id="audio-player" data-status="<%= @listener_status %>">
+      <audio controls autoplay>
+        <source src>
+      </audio>
+      <div id="next-wrapper"><%= fa_icon 'fast-forward lg', id: 'next' %></div>
+    </div>
+    <div id="song-info">
+      <b id="song-name"></b>
+      <p><em>by</em> <span id="artist-name"></span></p>
+      <p><em>on</em> <span id="album-name"></span></p>
+    </div>
+  </div>
 
-<div id="song-info">
-  <span id="song-name"><%= @room.playlist.try(:first).try(:song_name) %></span>:
-  <span id="artist-name"><%= @room.playlist.try(:first).try(:artist_name) %></span> --
-  <span id="song-album"><%= @room.playlist.try(:first).try(:album_name) %></span>
+  <div id="album-art">
+    <img height="200" alt="Image not found" onError="this.src='/assets/unknown.png';" src>
+  </div>
 </div>
-
-<span id="next">Next</span>
