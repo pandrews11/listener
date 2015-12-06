@@ -16,15 +16,14 @@ ActiveRecord::Schema.define(version: 20151006032531) do
   create_table "rooms", force: :cascade do |t|
     t.text     "name"
     t.text     "username"
-    t.text     "password"
+    t.text     "password_digest"
     t.text     "station_id"
     t.text     "playlist"
     t.text     "box"
-    t.datetime "playlist_expiration", default: '2015-12-03 03:54:40'
-    t.integer  "listeners",           default: 0
+    t.integer  "listeners",       default: 0
     t.integer  "user_id"
-    t.datetime "created_at",                                          null: false
-    t.datetime "updated_at",                                          null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "users", force: :cascade do |t|

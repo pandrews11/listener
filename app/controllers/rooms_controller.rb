@@ -16,9 +16,8 @@ class RoomsController < ApplicationController
     @listener_status = get_listener_status
   end
 
-  def song_complete
-    @room.complete_song
-    @room.save
+  def song_started
+    @room.song_started
     render nothing: true
   end
 

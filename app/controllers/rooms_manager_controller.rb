@@ -18,7 +18,6 @@ class RoomsManagerController < WebsocketRails::BaseController
   end
 
   def leave
-    p "user leaving"
     Room.find(message[:room_id]).decrement!(:listeners, 1)
   end
 end

@@ -5,9 +5,8 @@ Rails.application.routes.draw do
   resources :rooms do
     get 'next', on: :member
     get 'info', on: :member
-    get 'song_complete', on: :member
+    get 'song_started', on: :member
     post 'set_station_id', on: :member
-
   end
 
   root 'index#show'

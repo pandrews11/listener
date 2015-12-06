@@ -2,11 +2,13 @@ require 'box'
 require 'base64'
 
 class Room < ActiveRecord::Base
+  has_secure_password
+
   serialize :playlist, Array
 
   belongs_to :user
 
-  before_save :bust_playlist!, :if => :station_id_changed?
+  before_save :bust_playlist!, :if => :bust_playlist?
 
   def box
     marshal_box if read_attribute(:box).blank?
@@ -25,12 +27,12 @@ class Room < ActiveRecord::Base
     box.stations
   end
 
-  def complete_song
-    playlist.shift
+  def song_started
+    self.playlist = playlist.drop(1)
+    save
   end
 
   def playlist
-    (bust_playlist! && save) if expire_playlist?
     read_attribute :playlist
   end
 
@@ -39,7 +41,7 @@ class Room < ActiveRecord::Base
   end
 
   def info
-    { :station_id => station.station_id, :playlist => playlist }
+    { :station_id => station_id, :playlist => playlist }
   end
 
   def marshal_box
@@ -59,12 +61,11 @@ class Room < ActiveRecord::Base
   end
 
   def bust_playlist!
-    write_attribute :playlist, song_map
-    self.playlist_expiration = 30.minutes.from_now
+    self.playlist = song_map
   end
 
-  def expire_playlist?
-    Time.now > playlist_expiration || playlist_empty?
+  def bust_playlist?
+    playlist_empty? || station_id_changed?
   end
 
   def playlist_empty?
