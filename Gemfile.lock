@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/pandrews11/box.git
-  revision: 74ed457fa2e6b27050ac798720103a020cd3c203
+  revision: 86abef128b466d2bb900bf91ffd625e8f884664f
   specs:
     box (0.1.0)
       activesupport
