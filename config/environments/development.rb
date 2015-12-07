@@ -43,4 +43,5 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   config.middleware.delete Rack::Lock
+  config.web_console.whitelisted_ips = '192.168.0.0/16'
 end
