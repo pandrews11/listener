@@ -17,8 +17,6 @@
 //= require websocket_rails/main
 //= require utils
 //= require queue
-//= require manager
-//= require listener
 //= require tabs
 //= require_tree .
 

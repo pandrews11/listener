@@ -6,7 +6,7 @@ WebsocketRails.setup do |config|
   # config.log_level = :debug
 
   # Uncomment to change the default log file path.
-  # config.log_path = "#{Rails.root}/log/websocket_rails.log"
+  config.log_path = "#{Rails.root}/log/production.log"
 
   # Set to true if you wish to log the internal websocket_rails events
   # such as the keepalive `websocket_rails.ping` event.
@@ -20,7 +20,7 @@ WebsocketRails.setup do |config|
   # Change to true to enable channel synchronization between
   # multiple server instances.
   # * Requires Redis.
-  config.synchronize = Rails.env.production?
+  config.synchronize = false
 
   # Prevent Thin from daemonizing (default is true)
   # config.daemonize = false
@@ -28,12 +28,12 @@ WebsocketRails.setup do |config|
   # Uncomment and edit to point to a different redis instance.
   # Will not be used unless standalone or synchronization mode
   # is enabled.
-  config.redis_options = {
-    :host => ENV['REDIS_HOST'] || 'localhost',
-    :port => ENV['REDIS_PORT'] || '6379',
-    :user => ENV['REDIS_USER'],
-    :password => ENV['REDIS_PASSWORD']
-  }
+  # config.redis_options = {
+  #   :host => ENV['REDIS_HOST'] || 'localhost',
+  #   :port => ENV['REDIS_PORT'] || '6379',
+  #   :user => ENV['REDIS_USER'],
+  #   :password => ENV['REDIS_PASSWORD']
+  # }
 
   # By default, all subscribers in to a channel will be removed
   # when that channel is made private. If you don't wish active

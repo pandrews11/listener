@@ -257,6 +257,7 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   shoulda-matchers
   spring
+  thin
   turbolinks
   uglifier (>= 1.3.0)
   web-console
