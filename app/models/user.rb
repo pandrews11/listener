@@ -5,9 +5,10 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_one :room
+  belongs_to :room
 
   def owns?(room)
-    self.room == room
+    room.owner == self
   end
 
 end

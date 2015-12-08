@@ -16,9 +16,9 @@
         <% Room.all.each do |r| %>
           <tr>
             <td><%= link_to r.name, room_path(r) %></td>
-            <td><%= r.user.username %></td>
+            <td><%= r.owner.username %></td>
             <td></td>
-            <td><%= r.listeners %></td>
+            <td><%= r.listeners.count %></td>
         <% end %>
       </tbody>
     </table>

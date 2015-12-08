@@ -6,7 +6,10 @@ class Room < ActiveRecord::Base
 
   serialize :playlist, Array
 
-  belongs_to :user
+  belongs_to :owner, :class_name => 'User'
+  has_many :listeners, :class_name => 'User',
+    :after_add => :listener_added,
+    :after_remove => :listener_left
 
   before_save :bust_playlist!, :if => :bust_playlist?
 
@@ -49,6 +52,16 @@ class Room < ActiveRecord::Base
   end
 
   private
+
+  def listener_added(user)
+    WebsocketRails.users[owner.id] \
+      .send_message(:listener_added, user.to_json)
+  end
+
+  def listener_left(user)
+    WebsocketRails.users[owner.id] \
+      .send_message(:listener_left, user.to_json)
+  end
 
   def song_data(song)
     {

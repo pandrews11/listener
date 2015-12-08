@@ -25,3 +25,16 @@
     <img height="200" alt="Image not found" onError="this.src='/assets/unknown.png';" src>
   </div>
 </div>
+
+<div class="panel panel-default listener-list-panel col-md-3">
+  <div class="panel-heading">
+    <h3 class="panel-title">Listeners</h3>
+  </div>
+  <ul class="listener-list list-group">
+    <% @room.listeners.each do |l| %>
+      <li data-id="<%= l.id %>" class="list-group-item">
+        <span><%= l.username %></span>
+      </li>
+    <% end %>
+  </ul>
+</div>

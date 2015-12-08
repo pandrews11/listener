@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151006032531) do
+ActiveRecord::Schema.define(version: 20151208054517) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "rooms", force: :cascade do |t|
     t.text     "name"
@@ -20,10 +23,10 @@ ActiveRecord::Schema.define(version: 20151006032531) do
     t.text     "station_id"
     t.text     "playlist"
     t.text     "box"
-    t.integer  "listeners",       default: 0
     t.integer  "user_id"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "owner_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -40,9 +43,10 @@ ActiveRecord::Schema.define(version: 20151006032531) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.integer  "room_id"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end

@@ -8,7 +8,7 @@ class RoomsController < ApplicationController
   end
 
   def create
-    Room.create room_params
+    Room.create(room_params.merge(:owner => current_user))
     redirect_to :action => :index
   end
 
