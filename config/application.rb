@@ -26,7 +26,5 @@ module Listener
 
     # Autoload lib
     config.autoload_paths << Rails.root.join('lib')
-
-    config.middleware.delete Rack::Lock
   end
 end
