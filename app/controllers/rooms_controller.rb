@@ -1,7 +1,7 @@
 class RoomsController < ApplicationController
   respond_to :html, :json
 
-  before_filter :find_room, :except => [:new, :create, :index]
+  before_action :find_room, :except => [:new, :create, :index]
 
   def new
     @room = Room.new

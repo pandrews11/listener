@@ -2,8 +2,8 @@
 <%= javascript_include_tag 'rooms' %>
 
 <div class="room-list list-group">
-  <% @room.stations.each do |s| %>
-    <%= play_station_button(s) %>
+  <% @room.stations.each do |station| %>
+    <%= play_station_button(@room, station) %>
   <% end %>
 </div>
 

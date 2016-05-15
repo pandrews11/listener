@@ -2,4 +2,4 @@ $('form').removeClass('active');
 $('form input[data-station-id=<%= escape_javascript(@room.station_id) %>]')
   .parent().addClass('active');
 
-$('#audio-player').find('audio').manager('stationChange');
+$('#audio-player').find('audio').data('manager').changeStation();

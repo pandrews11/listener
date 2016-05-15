@@ -14,9 +14,7 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require bootstrap-sprockets
-//= require utils
 //= require queue
-//= require tabs
 //= require_tree .
 
 

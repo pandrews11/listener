@@ -54,13 +54,13 @@ class Room < ActiveRecord::Base
   private
 
   def listener_added(user)
-    WebsocketRails.users[owner.id] \
-      .send_message(:listener_added, user.to_json)
+    # WebsocketRails.users[owner.id] \
+    #   .send_message(:listener_added, user.to_json)
   end
 
   def listener_left(user)
-    WebsocketRails.users[owner.id] \
-      .send_message(:listener_left, user.to_json)
+    # WebsocketRails.users[owner.id] \
+    #   .send_message(:listener_left, user.to_json)
   end
 
   def song_data(song)
