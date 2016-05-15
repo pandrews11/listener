@@ -8,17 +8,50 @@ var Manager = function( options ) {
   this.nextButton = $('#next')
   this.roomId = $(location).attr('href').split('/').slice(-1)[0];
 
-  this.cable = App.cable.subscriptions.create({
-    channel: 'ListenerChannel',
+  this.server = App.cable.subscriptions.create({
+    channel: 'ManagerChannel',
     room_id: $_manager.roomId
-  }, {
-    connected: function() {
-      $_manager._setUp();
-    }
   });
+
+  this.server.connected = function() {
+    console.log("Manager Connected")
+    $_manager._setUp();
+  },
+
+  this.server.received = function(data) {
+    console.log("Received: ")
+    console.log(data);
+    switch(data.action) {
+      case 'user_join':
+        $_manager.sync_user(data.user_id)
+        break;
+      default:
+        console.log("Received broadcast request with undefined action");
+        console.log(data);
+    }
+  },
+
+  this.sync_user = function(user_id) {
+    console.log("Asked to sync user with id:" + user_id)
+    console.log("Sending sync data");
+    console.log($.extend({user_id: user_id}, $_manager._currentInfo()));
+
+    this.server.perform( "sync_user",
+      $.extend({user_id: user_id}, $_manager._currentInfo())
+    );
+  }
+
+  this.syncAll = function() {
+    console.log("Syncing all users...")
+    console.log($_manager._currentInfo())
+    this.server.perform( "sync_all", $_manager._currentInfo() );
+  },
 
   this.next = function() {
     this._loadNextSong();
+
+    // Sync all listeners
+    this.syncAll();
   },
 
   this.changeStation = function() {
@@ -82,6 +115,26 @@ var Manager = function( options ) {
     }
   },
 
+  this._currentTime = function() {
+    return this.element[0].currentTime;
+  },
+
+  this._songData = function() {
+    return {
+      song: $('#song-name').text(),
+      artist: $('#artist-name').text(),
+      album: $('#album-name').text(),
+      song_url: this.element.find('source')[0].src,
+      album_art_url: $('#album-art').find('img').attr('src')
+    };
+  },
+
+  this._currentInfo = function() {
+    return $.extend( $_manager._songData(), {
+      current_time: $_manager._currentTime()
+    });
+  },
+
   this._updateMetadata = function(data) {
     $('#artist-name').text(data.artist);
     $('#song-name').text(data.song);
@@ -95,8 +148,13 @@ var Manager = function( options ) {
     $_manager.element[0].load();
   },
 
+  this.playing = function() {
+    return this.element[0].duration > 0 && !this.element[0].paused
+  }
+
   this._setUp = function() {
-    this.next();
+    if ( !$_manager.playing() )
+      this.next();
 
     this.element.on('ended', function(e) {
       $_manager.next();

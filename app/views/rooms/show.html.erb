@@ -1,6 +1,3 @@
-<%= javascript_include_tag "#{@listener_status}" %>
-<%= javascript_include_tag 'rooms' %>
-
 <div class="room-list list-group">
   <% @room.stations.each do |station| %>
     <%= play_station_button(@room, station) %>

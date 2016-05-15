@@ -11,4 +11,11 @@ class User < ActiveRecord::Base
     room.owner == self
   end
 
+  def join(room_id)
+    ActionCable.server.broadcast "room_#{room_id}:manager",
+      { action: 'user_join', user_id: id }
+  end
+
+
+
 end

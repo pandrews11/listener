@@ -9,7 +9,7 @@ $( window ).load(function() {
       element: audioPlayer.find('audio')
     });
   } else {
-    // $('#audio-player').find('audio').listener(metadata);
+    var $listener = new Listener(audioPlayer.find('audio'));
   }
 
 })

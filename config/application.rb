@@ -26,5 +26,8 @@ module Listener
 
     # Autoload lib
     config.autoload_paths << Rails.root.join('lib')
+
+    # Cable path
+    config.action_cable.mount_path = '/cable'
   end
 end

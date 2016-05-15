@@ -42,5 +42,5 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 
-  config.web_console.whitelisted_ips = '192.168.0.0/16'
+  config.action_cable.disable_request_forgery_protection = true
 end
