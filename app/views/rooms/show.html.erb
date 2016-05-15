@@ -3,7 +3,7 @@
 
 <div class="room-list list-group">
   <% @room.stations.each do |s| %>
-    <%= @room.decorate.play_station(s) %>
+    <%= play_station_button(s) %>
   <% end %>
 </div>
 

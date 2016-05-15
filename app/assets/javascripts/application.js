@@ -14,7 +14,6 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require bootstrap-sprockets
-//= require websocket_rails/main
 //= require utils
 //= require queue
 //= require tabs

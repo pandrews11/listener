@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
-ruby '2.2.1'
+ruby '2.3.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.4'
+gem 'rails', '5.0.0.rc1'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -42,10 +42,7 @@ gem 'autoprefixer-rails'
 
 gem 'box', git: 'https://github.com/pandrews11/box.git'
 
-gem 'draper'
-gem 'websocket-rails'
-gem 'faye-websocket', '0.10.0'
-
+gem 'activemodel-serializers-xml', git: 'https://github.com/rails/activemodel-serializers-xml'
 gem 'font-awesome-rails'
 
 group :development, :test do
