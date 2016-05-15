@@ -18,7 +18,7 @@ class RoomsController < ApplicationController
 
   def song_started
     @room.song_started
-    render nothing: true
+    head :ok
   end
 
   def info

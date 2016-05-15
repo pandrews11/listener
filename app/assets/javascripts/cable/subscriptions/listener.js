@@ -1,11 +1,11 @@
 var Listener = function(element) {
-  var $_listener = this;
+  var $listener = this;
   this.element = element;
   this.roomId = $(location).attr('href').split('/').slice(-1)[0];
 
   this.server = App.cable.subscriptions.create({
     channel: 'ListenerChannel',
-    room_id: $_listener.roomId
+    room_id: $listener.roomId
   });
 
   this.server.connected = function() {
@@ -13,9 +13,9 @@ var Listener = function(element) {
   },
 
   this.server.received = function(data) {
-    console.log("received sync request: ")
+    console.log("Received sync request... ")
     console.log(data);
-    $_listener._loadToAudioElement(data);
+    $listener._loadToAudioElement(data);
   },
 
   this._loadToAudioElement = function(songData) {
@@ -23,7 +23,6 @@ var Listener = function(element) {
     this.element.find('source')[0].src = songData.song_url;
     this.element[0].currentTime = songData.current_time;
     this.element[0].load();
-    this.element[0].play();
   },
 
   this._updateMetadata = function(data) {

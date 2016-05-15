@@ -1,15 +1,9 @@
 //= require_self
 
-$( window ).load(function() {
-
-  var audioPlayer = $('#audio-player')
-
-  if ( audioPlayer.attr('data-status') === 'manager' ) {
-    var $manager = new Manager({
-      element: audioPlayer.find('audio')
-    });
+$( document ).ready( function() {
+  if ( $('#audio-player').attr('data-status') === 'manager' ) {
+    var manager = new Manager();
   } else {
-    var $listener = new Listener(audioPlayer.find('audio'));
+    var listener = new Listener();
   }
-
-})
+});
