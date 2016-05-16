@@ -26,12 +26,33 @@ var Manager = function() {
   },
 
   this.server.received = function(data) {
+    var user = $.parseJSON(data.user);
+
     switch(data.action) {
-      case 'user_join':
-        $manager.sync_user(data.user_id)
+      case 'user_added':
+        $manager.sync_user(user.id);
+        $manager.addToListenerList(user);
+        break;
+      case 'user_left':
+        $manager.removeFromListenerList(user);
         break;
     }
   },
+
+  this.addToListenerList = function(user) {
+    var newItem = $([
+      "<li data-id='" + user.id + "' class='list-group-item'>",
+      "<span>" + user.username + "</span>",
+      "</li>"
+    ].join("\n"));
+
+    $('.listener-list').append(newItem);
+  }
+
+  this.removeFromListenerList = function(user) {
+    $('.listener-list').find('li[data-id=' + user.id + ']')
+      .fadeOut("fast", function() { $(this).remove() });
+  }
 
   this.sync_user = function(user_id) {
     console.log("Asked to sync user with id: " + user_id)

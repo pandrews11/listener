@@ -12,8 +12,15 @@ class User < ActiveRecord::Base
   end
 
   def join(room_id)
-    ActionCable.server.broadcast "room_#{room_id}:manager",
-      { action: 'user_join', user_id: id }
+    if room = Room.find_by(id: room_id)
+      room.listeners |= [self]
+    end
+  end
+
+  def leave(room_id)
+    if room = Room.find_by(id: room_id)
+      room.listeners.delete self
+    end
   end
 
 
