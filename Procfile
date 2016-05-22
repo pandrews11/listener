@@ -1,2 +1,2 @@
-web: bundle exec thin start -p $PORT -e $RACK_ENV
+web: bundle exec puma -C config/puma.rb
 cable : bundle exec puma -p 28080 cable/config.ru
